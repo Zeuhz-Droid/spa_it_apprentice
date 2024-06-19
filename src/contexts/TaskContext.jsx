@@ -63,8 +63,8 @@ export const TaskProvider = ({ children }) => {
   return (
     <TaskContext.Provider
       value={{
-        error,
         tasks,
+        error,
         fetchTasks,
         isLoading,
         updateTask,

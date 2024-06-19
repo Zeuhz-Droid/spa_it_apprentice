@@ -18,6 +18,7 @@ function Task({ task }) {
     setIsDeleting(true);
     try {
       await deleteTask(task.id);
+      toast.success("Task Deleted successfully!");
     } catch (error) {
       toast.error("Error deleting task:", error);
     } finally {
@@ -38,6 +39,7 @@ function Task({ task }) {
     setIsUpdating(true);
     try {
       await updateTask(task.id, { ...updatedTask, title: sanitizedValue });
+      toast.success("Task Updated successfully!");
     } catch (error) {
       toast.error("Error updating task:", error);
     } finally {
@@ -78,10 +80,10 @@ function Task({ task }) {
     <div className="flex mr-2">
       <input
         required
-        id="task"
+        id="show_task"
         type="text"
         title="task"
-        aria-label="task input"
+        aria-label="task display"
         disabled={task.completed}
         onBlur={handleBlur}
         onKeyDown={handleEnter}
