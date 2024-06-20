@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTask } from "../contexts/TaskContext";
 import toast from "react-hot-toast";
 import MiniLoader from "./MiniLoader";
@@ -12,6 +12,11 @@ const AddTask = () => {
   const { createTask } = useTask();
   const [isCreating, setIsCreating] = useState(false);
   const [value, setValue] = useState("");
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   const handleCreate = async () => {
     if (!value.trim()) {
@@ -34,7 +39,6 @@ const AddTask = () => {
       toast.error("Error creating task:", error.message);
     } finally {
       setIsCreating(false);
-      document.getElementById("add_task").focus();
     }
   };
 
@@ -46,16 +50,17 @@ const AddTask = () => {
   };
 
   return (
-    <div className="flex py-9">
+    <form className="flex py-9">
       <input
         required
-        id="add_task"
         type="text"
         title="task"
-        aria-label="add new-task"
+        value={value}
+        id="add_task"
+        ref={inputRef}
         disabled={isCreating}
         onKeyDown={handleEnter}
-        value={value}
+        aria-label="add new-task"
         onChange={(e) => setValue(e.target.value)}
         className={`outline-none appearance-none text-gray-900 placeholder:text-gray-900 font-medium px-3 py-2 w-[85%] ${
           isCreating ? "cursor-not-allowed bg-gray-200" : ""
@@ -68,7 +73,7 @@ const AddTask = () => {
       >
         {isCreating ? <MiniLoader /> : <HiOutlinePaperAirplane />}
       </button>
-    </div>
+    </form>
   );
 };
 

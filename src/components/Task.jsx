@@ -63,17 +63,20 @@ function Task({ task }) {
     }
   };
 
+  const isValid = () => {
+    return !value || value.trim() === task.title.trim() ? false : true;
+  };
+
   const handleEnter = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && isValid()) {
       handleUpdate({ title: value });
-      e.target.blur();
     }
   };
 
   const handleBlur = () => {
-    if (!value) return;
-
-    handleUpdate({ title: value });
+    if (isValid()) {
+      handleUpdate({ title: value });
+    }
   };
 
   return (
