@@ -21,7 +21,7 @@ function Tasks() {
     <div className="flex flex-col gap-4 m-auto md:w-[80%]">
       <AddTask />
       <div className="flex flex-col gap-4 m-auto w-[90%] md:w-[70%] mt-4">
-        <h2 className="text-3xl">Tasks:</h2>
+        <h2 className="text-2xl font-bold">Tasks:</h2>
         {!tasksDisplayed.length ? (
           <div className="italic text-sm font-medium ml-4">
             You have no tasks currently.
