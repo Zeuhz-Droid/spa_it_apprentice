@@ -8,7 +8,7 @@ const LIMIT = 10;
 function Tasks() {
   const { tasks, isLoading } = useTask();
 
-  const tasksDisplayed = tasks.slice(0, LIMIT);
+  const tasksDisplayed = tasks?.slice(0, LIMIT);
 
   if (isLoading)
     return (
@@ -22,9 +22,17 @@ function Tasks() {
       <AddTask />
       <div className="flex flex-col gap-4 m-auto w-[90%] md:w-[70%] mt-4">
         <h2 className="text-3xl">Tasks:</h2>
-        {tasksDisplayed.map((task) => (
-          <Task key={task.id} task={task} />
-        ))}
+        {!tasksDisplayed.length ? (
+          <div className="italic text-sm font-medium ml-4">
+            You have no tasks currently.
+          </div>
+        ) : (
+          <>
+            {tasksDisplayed.map((task) => (
+              <Task key={task._id} task={task} />
+            ))}
+          </>
+        )}
       </div>
     </div>
   );

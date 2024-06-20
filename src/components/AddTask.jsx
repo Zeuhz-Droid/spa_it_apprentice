@@ -23,9 +23,7 @@ const AddTask = () => {
     const sanitizedValue = DOMPurify.sanitize(value);
 
     const task = {
-      id: Math.random().toString(36).substr(2, 9),
       title: sanitizedValue,
-      completed: false,
     };
 
     try {
@@ -36,6 +34,7 @@ const AddTask = () => {
       toast.error("Error creating task:", error.message);
     } finally {
       setIsCreating(false);
+      document.getElementById("add_task").focus();
     }
   };
 
@@ -58,7 +57,7 @@ const AddTask = () => {
         onKeyDown={handleEnter}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className={`outline-none appearance-none text-gray-900 font-medium px-3 py-2 w-[85%] ${
+        className={`outline-none appearance-none text-gray-900 placeholder:text-gray-900 font-medium px-3 py-2 w-[85%] ${
           isCreating ? "cursor-not-allowed bg-gray-200" : ""
         }`}
       />

@@ -17,7 +17,7 @@ function Task({ task }) {
   const handleDelete = async () => {
     setIsDeleting(true);
     try {
-      await deleteTask(task.id);
+      await deleteTask(task._id);
       toast.success("Task Deleted successfully!");
     } catch (error) {
       toast.error("Error deleting task:", error);
@@ -38,7 +38,7 @@ function Task({ task }) {
 
     setIsUpdating(true);
     try {
-      await updateTask(task.id, { ...updatedTask, title: sanitizedValue });
+      await updateTask(task._id, { ...updatedTask, title: sanitizedValue });
       toast.success("Task Updated successfully!");
     } catch (error) {
       toast.error("Error updating task:", error);
